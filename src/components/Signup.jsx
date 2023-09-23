@@ -36,7 +36,7 @@ const Signup = () => {
       });
     }
     await axios
-      .post("https://to-do-api.onrender.com/api/signup", user)
+      .post("https://to-do-api-0dlv.onrender.com/api/signup", user)
       .then(() => navigate("/"))
       .catch((error) =>
         setError(() => {

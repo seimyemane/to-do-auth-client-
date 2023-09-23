@@ -20,7 +20,7 @@ const Home = () => {
   useEffect(() => {
     const getTodos = async () => {
       await axios
-        .get("https://to-do-api.onrender.com/api/get_todos")
+        .get("https://to-do-api-0dlv.onrender.com/api/get_todos")
         .then((res) => {
           setTodos(() => [res.data.data]);
         })
@@ -53,7 +53,7 @@ const Home = () => {
     e.preventDefault();
 
     await axios
-      .post("https://to-do-api.onrender.com/api/add_todo", addTodo)
+      .post("https://to-do-api-0dlv.onrender.com/api/add_todo", addTodo)
       .then((res) => window.location.reload(false))
       .catch((error) =>
         setError(() => {
@@ -68,7 +68,7 @@ const Home = () => {
 
   const handleDeleteTodo = async (id) => {
     await axios
-      .patch("https://to-do-api.onrender.com/api/delete_todo", { id })
+      .patch("https://to-do-api-0dlv.onrender.com/api/delete_todo", { id })
       .then((res) => {
         window.location.reload(false);
       })
@@ -89,7 +89,7 @@ const Home = () => {
   };
   const handleSignout = async () => {
     await axios
-      .post("https://to-do-api.onrender.com/api/signout", {
+      .post("https://to-do-api-0dlv.onrender.com/api/signout", {
         withCredentials: true,
       })
       .then(navigate("/"))
