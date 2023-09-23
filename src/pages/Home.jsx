@@ -25,9 +25,7 @@ const Home = () => {
           setTodos(() => [res.data.data]);
         })
         .catch((error) =>
-          error.request.status === 401
-            ? navigate("/")
-            : setError(() => {
+          setError(() => {
                 return {
                   status: true,
                   message: error.response.data.data,
@@ -36,7 +34,7 @@ const Home = () => {
         );
     };
     getTodos();
-  }, [todos]);
+  }, []);
 
   const [addTodo, setAddTodo] = useState({
     todo: "",
