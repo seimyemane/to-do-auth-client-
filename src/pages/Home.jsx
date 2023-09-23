@@ -20,13 +20,14 @@ const Home = () => {
   useEffect(() => {
     const getTodos = async () => {
       await axios
-        .get("https://to-do-api-0dlv.onrender.com/api/get_todos", {
-          withCredentials: true)
+        .get("https://to-do-api.onrender.com/api/get_todos")
         .then((res) => {
           setTodos(() => [res.data.data]);
         })
         .catch((error) =>
-          setError(() => {
+          error.request.status === 401
+            ? navigate("/")
+            : setError(() => {
                 return {
                   status: true,
                   message: error.response.data.data,
@@ -35,7 +36,7 @@ const Home = () => {
         );
     };
     getTodos();
-  }, []);
+  }, [todos]);
 
   const [addTodo, setAddTodo] = useState({
     todo: "",
