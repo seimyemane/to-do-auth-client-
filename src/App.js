@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import Main from "./pages/Main";
+import { Routes, Route } from "react-router-dom";
+
+import Home from "./pages/Home";
+import Signup from "./components/Signup";
+import TodoUpdate from "./components/TodoUpdate";
+import { AuthContextProvider } from "./components/AuthContext";
+import ErrorLayout from "./components/ErrorLayout";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthContextProvider>
+      <Routes>
+        <Route exact path="/" element={<Main />} />
+
+        <Route exact path="home" element={<Home />} />
+
+        <Route exact path="signup" element={<Signup />} />
+        <Route exact path="update/:id" element={<TodoUpdate />} />
+
+        <Route exact path="/*" element={<ErrorLayout />} />
+      </Routes>
+    </AuthContextProvider>
   );
 }
 
