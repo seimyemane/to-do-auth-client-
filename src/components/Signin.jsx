@@ -49,6 +49,7 @@ const Signin = () => {
       .finally(() => navigate("/home"))
       .catch((error) =>
         setError((prevState) => {
+          console.log(error);
           return {
             ...prevState,
             status: true,

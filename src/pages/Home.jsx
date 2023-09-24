@@ -20,19 +20,22 @@ const Home = () => {
   useEffect(() => {
     const getTodos = async () => {
       await axios
-        .get("https://to-do-api.onrender.com/api/get_todos")
+        .get("https://to-do-api-0dlv.onrender.com/api/get_todos", {
+          withCredentials: true,
+        })
         .then((res) => {
           setTodos(() => [res.data.data]);
         })
         .catch((error) =>
-          error.request.status === 401
-            ? navigate("/")
-            : setError(() => {
-                return {
-                  status: true,
-                  message: error.response.data.data,
-                };
-              }).then(() => navigate("/"))
+          // error.request.status === 401
+          //   ? navigate("/")
+          //   : setError(() => {
+          //       return {
+          //         status: true,
+          //         message: error.response.data.data,
+          //       };
+          //     }).then(() => navigate("/"))
+          console.log(error, "this error")
         );
     };
     getTodos();

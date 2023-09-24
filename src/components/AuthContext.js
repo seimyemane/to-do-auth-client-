@@ -14,20 +14,20 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
   const loginApiCall = async (payload) => {
-    await axios
-      .post("https://to-do-api-0dlv.onrender.com/api/signin", payload, {
-        withCredentials: true,
-      })
-      .then(() => setUser(() => payload))
-      .catch((error) => {
-        setError(() => {
-          return {
-            status: true,
-            message: `${error.message}, please try again!`,
-            err: error,
-          };
-        });
+    try {
+      await axios
+        .post("https://to-do-api-0dlv.onrender.com/api/signin", payload, {
+          withCredentials: true,
+        })
+        .then((res) => setUser(() => payload));
+    } catch (error) {
+      setError(() => {
+        return {
+          status: true,
+          message: `${error.message}, please try again!`,
+        };
       });
+    }
   };
   return (
     <AuthContext.Provider value={{ loginApiCall, user }}>
