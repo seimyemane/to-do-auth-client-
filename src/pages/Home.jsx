@@ -33,10 +33,11 @@ const Home = () => {
                   message: error.response.data.data,
                 };
               }).then(() => navigate("/"))
+       console.loG(error)
         );
     };
     getTodos();
-  }, [todos]);
+  }, []);
 
   const [addTodo, setAddTodo] = useState({
     todo: "",
