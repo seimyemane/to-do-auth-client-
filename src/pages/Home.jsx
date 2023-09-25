@@ -13,12 +13,15 @@ const Home = () => {
     status: false,
     message: "",
   });
+  const [count, setCount] = useState(0)
   const navigate = useNavigate();
   const [todos, setTodos] = useState([]);
 
   //gets all the user's todos after login
 
   useEffect(() => {
+
+    
     const getTodos = async () => {
       await axios
         .get("https://to-do-api-0dlv.onrender.com/api/get_todos", {
@@ -39,7 +42,7 @@ const Home = () => {
         );
     };
     getTodos();
-  }, []);
+  }, [count]);
 
   const [addTodo, setAddTodo] = useState({
     todo: "",
@@ -57,7 +60,7 @@ const Home = () => {
 
     await axios
       .post("https://to-do-api-0dlv.onrender.com/api/add_todo", addTodo)
-      .then((res) => navigate("/home"))
+      .then((res) => setCount(count + 1))
       .catch((error) =>
         setError(() => {
           return {
