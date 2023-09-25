@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import axios from "axios";
-import { Outlet, useNavigate } from "react-router-dom";
 import ErrorLayout from "./ErrorLayout";
+
 const AuthContext = createContext({});
 
 export const AuthContextProvider = ({ children }) => {
@@ -10,24 +10,24 @@ export const AuthContextProvider = ({ children }) => {
     message: "",
     error: "",
   });
-  const navigate = useNavigate();
   const [user, setUser] = useState({});
 
   const loginApiCall = async (payload) => {
-    try {
-      await axios
-        .post("https://to-do-api-0dlv.onrender.com/api/signin", payload, {
-          withCredentials: true,
-        })
-        .then((res) => setUser(() => payload));
-    } catch (error) {
-      setError(() => {
-        return {
-          status: true,
-          message: `${error.message}, please try again!`,
-        };
+    await axios
+      .post("https://to-do-api-0dlv.onrender.com/api/signin", payload, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setUser(() => payload);
+      })
+      .catch((error) => {
+        setError(() => {
+          return {
+            status: true,
+            message: `${error.message} go back and try again!`,
+          };
+        });
       });
-    }
   };
   return (
     <AuthContext.Provider value={{ loginApiCall, user }}>

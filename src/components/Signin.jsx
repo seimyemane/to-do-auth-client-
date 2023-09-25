@@ -10,6 +10,7 @@ const Signin = () => {
     status: false,
     message: "",
   });
+
   const { loginApiCall } = useContext(AuthContext);
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
@@ -49,7 +50,6 @@ const Signin = () => {
       .finally(() => navigate("/home"))
       .catch((error) =>
         setError((prevState) => {
-          console.log(error);
           return {
             ...prevState,
             status: true,
@@ -60,7 +60,7 @@ const Signin = () => {
   };
   return (
     <div
-      className=" h-[100vh] bg-no-repeat bg-cover flex justify-around items-center flex-col"
+      className=" flex justify-around items-center flex-col bg-[url(https://img.freepik.com/free-photo/3d-background-with-white-cubes_23-2150472987.jpg?size=626&ext=jpg)] h-[100vh] bg-no-repeat bg-cover"
       onClick={() =>
         setError(() => {
           return {
@@ -71,10 +71,13 @@ const Signin = () => {
       }
     >
       {error.status && <ErrorLayout data={error} />}
-      <p className="text-4xl lg:text-6xl lg:w-1/2 md:text-6xl md:w-2/3 sm:text-6xl sm:w-full font-thin from-stone-200 flex justify-center items-center ">
+      <p className="text-2xl lg:text-3xl lg:w-1/2 md:text-4xl md:w-2/3 sm:text-3xl sm:w-full font-bold flex justify-center items-center  p-2 rounded-2xl bg-opacity-10 bg-slate-600 text-slate-700">
+        Write your to-do's here and access them anywhere, anytime, any device
+      </p>
+      <p className="text-6xl lg:text-6xl lg:w-1/2 md:text-6xl md:w-2/3 sm:text-6xl sm:w-full font-thin flex justify-center items-center ">
         let's get started!
       </p>
-      <div className="bg-rose-200 bg-opacity-[15%] bg-transparent  flex  justify-center items-center h-[70%]  lg:w-[50%] md:w-[70%] sm:w-[80%] sm:p-1 sm:text-sm rounded-xl p-4 shadow-2xl shadow-slate-600  ">
+      <div className="bg-rose-200 bg-opacity-[15%] bg-transparent  flex  justify-center items-center h-[70%]  lg:w-[50%] md:w-[70%] sm:w-[80%] sm:p-1 sm:text-sm rounded-xl p-4 shadow-2xl shadow-slate-600 w-[80%] ">
         <form onSubmit={handleLoginSubmit}>
           <p className="text-4xl text-sky-950 font-thin  mb-2 flex flex-1  justify-between">
             Login <UserIcon />

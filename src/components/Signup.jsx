@@ -54,12 +54,12 @@ const Signup = () => {
     >
       {error.status && <ErrorLayout data={error} />}
       <div
-        className="flex flex-2 flex-col lg:h-[80%] md:h-[60%] sm:h-[80%] justify-center items-center lg:w-1/3 md:w-[70%]  sm:w-full opacity-100 bg-opacity-20 bg-cyan-800 rounded-3xl shadow-2xl shadow-teal-200
+        className=" flex flex-2 flex-col lg:h-[80%] md:h-[60%] sm:h-1/2  justify-center items-center lg:w-1/3 md:w-[70%]  sm:w-1/2 opacity-100 bg-opacity-20 bg-cyan-800 rounded-3xl shadow-2xl shadow-teal-200 h-1/2 w-fit 
 
-        w-[90%] h-1/2
+        
       "
       >
-        <p className=" w-1/2 flex justify-between items-center text-3xl   lg:text-4xl md:text-6xl sm:text-xl font-thin mb-1 ">
+        <p className="w-1/2 text-3xl flex justify-between items-center   lg:text-4xl md:text-6xl sm:text-3xl font-thin mb-1   ">
           Sign up
           <span>
             <UserIcon />

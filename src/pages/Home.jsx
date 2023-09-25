@@ -17,6 +17,7 @@ const Home = () => {
   const [todos, setTodos] = useState([]);
 
   //gets all the user's todos after login
+
   useEffect(() => {
     const getTodos = async () => {
       await axios
@@ -27,15 +28,14 @@ const Home = () => {
           setTodos(() => [res.data.data]);
         })
         .catch((error) =>
-          // error.request.status === 401
-          //   ? navigate("/")
-          //   : setError(() => {
-          //       return {
-          //         status: true,
-          //         message: error.response.data.data,
-          //       };
-          //     }).then(() => navigate("/"))
-          console.log(error, "this error")
+          error.request.status === 401
+            ? navigate("/")
+            : setError(() => {
+                return {
+                  status: true,
+                  message: error.response.data.data,
+                };
+              }).then(() => navigate("/"))
         );
     };
     getTodos();
