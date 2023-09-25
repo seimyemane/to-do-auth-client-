@@ -57,7 +57,7 @@ const Home = () => {
 
     await axios
       .post("https://to-do-api-0dlv.onrender.com/api/add_todo", addTodo)
-      .then((res) => window.location.reload(false))
+      .then((res) => navigate("/home"))
       .catch((error) =>
         setError(() => {
           return {
