@@ -57,7 +57,11 @@ const Home = () => {
   };
   const handleAddTodoSubmit = async (e) => {
     e.preventDefault();
-
+setAddTodo(() => {
+  return {
+    todo: "",
+  }
+})
     await axios
       .post("https://to-do-api-0dlv.onrender.com/api/add_todo", addTodo)
       .then((res) => setCount(count + 1))
@@ -76,7 +80,7 @@ const Home = () => {
     await axios
       .patch("https://to-do-api-0dlv.onrender.com/api/delete_todo", { id })
       .then((res) => {
-        window.location.reload(false);
+        setCount(count + 1)
       })
       .catch((error) =>
         setError(() => {
