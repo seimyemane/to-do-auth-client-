@@ -57,11 +57,11 @@ const Home = () => {
   };
   const handleAddTodoSubmit = async (e) => {
     e.preventDefault();
-    setAddToDo(() => {
+   setAddTodo(() => {
       return {
-         todo: "" 
-      }
-    })
+        todo: "",
+      };
+    });
  
 
     await axios
