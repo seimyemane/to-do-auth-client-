@@ -3,9 +3,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { GrDocumentUpdate as UpdateIcn } from "react-icons/gr";
 import ErrorLayout from "./ErrorLayout";
+import Spinner from "../images/spinner.gif";
 
 const TodoUpdate = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   /* setError catches error and sets the status to true which will trigger the <ErrorLayout/> component and sets the message to response.data.data */
   const [error, setError] = useState({
@@ -31,13 +33,14 @@ const TodoUpdate = () => {
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
+
     await axios
       .patch("https://to-do-api-0dlv.onrender.com/api/update_todo", todo, {
         withCredentials: true,
       })
-      .then(() => {
-        navigate("/home");
-      })
+      .then(() => setLoading(false))
+      .finally(navigate("/home"))
       .catch((error) =>
         setError(() => {
           return {

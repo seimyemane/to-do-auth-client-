@@ -5,6 +5,7 @@ import { AiTwotoneEdit as EditIcn } from "react-icons/ai";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ErrorLayout from "../components/ErrorLayout";
+import Spinner from "../images/spinner.gif";
 
 axios.defaults.withCredentials = true;
 const Home = () => {
@@ -13,15 +14,13 @@ const Home = () => {
     status: false,
     message: "",
   });
-  const [count, setCount] = useState(0)
   const navigate = useNavigate();
   const [todos, setTodos] = useState([]);
-
+  const [loading, setLoading] = useState(false);
+  const [count, setCount] = useState(0);
   //gets all the user's todos after login
 
   useEffect(() => {
-
-    
     const getTodos = async () => {
       await axios
         .get("https://to-do-api-0dlv.onrender.com/api/get_todos", {
@@ -57,14 +56,12 @@ const Home = () => {
   };
   const handleAddTodoSubmit = async (e) => {
     e.preventDefault();
-setAddTodo(() => {
-  return {
-    todo: "",
-  }
-})
+    setLoading(true);
+
     await axios
       .post("https://to-do-api-0dlv.onrender.com/api/add_todo", addTodo)
-      .then((res) => setCount(count + 1))
+      .then(() => setLoading(false))
+      .finally(() => setCount(count + 1))
       .catch((error) =>
         setError(() => {
           return {
@@ -79,9 +76,8 @@ setAddTodo(() => {
   const handleDeleteTodo = async (id) => {
     await axios
       .patch("https://to-do-api-0dlv.onrender.com/api/delete_todo", { id })
-      .then((res) => {
-        setCount(count + 1)
-      })
+      .then(() => setLoading(false))
+      .finally(() => setCount(count + 1))
       .catch((error) =>
         setError(() => {
           return {
@@ -126,11 +122,15 @@ setAddTodo(() => {
               className="hover:scale-125  cursor-pointer"
               onClick={() => handleUpdateTodo(t._id)}
             />
-            <DeleteIcn
-              onClick={() => handleDeleteTodo(t._id)}
-              size={25}
-              className="hover:scale-125  cursor-pointer"
-            />
+            {loading ? (
+              <img src={Spinner} alt="" srcset="" className="w-[25px]" />
+            ) : (
+              <DeleteIcn
+                onClick={() => handleDeleteTodo(t._id)}
+                size={25}
+                className="hover:scale-125  cursor-pointer"
+              />
+            )}
           </span>
         </h1>
       );

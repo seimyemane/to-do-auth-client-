@@ -4,12 +4,14 @@ import { RiLoginCircleFill as LoginIcon } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "./AuthContext";
 import ErrorLayout from "./ErrorLayout";
+import Spinner from "../images/spinner.gif";
 
 const Signin = () => {
   const [error, setError] = useState({
     status: false,
     message: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const { loginApiCall } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -37,7 +39,7 @@ const Signin = () => {
           message: "Please fill in the inputs",
         };
       });
-
+    setLoading(true);
     await loginApiCall(loginData)
       .then(() =>
         setLoginData(() => {
@@ -47,7 +49,10 @@ const Signin = () => {
           };
         })
       )
-      .finally(() => navigate("/home"))
+      .finally(() => {
+        setLoading(false);
+        navigate("/home");
+      })
       .catch((error) =>
         setError((prevState) => {
           return {
@@ -99,7 +104,20 @@ const Signin = () => {
             value={loginData.password}
           />
           <button className="mt-2">
-            <LoginIcon size="25px" color="black" className="hover:scale-125" />
+            {loading ? (
+              <img
+                src={Spinner}
+                alt="loading..."
+                srcset=""
+                className="w-[30px]"
+              />
+            ) : (
+              <LoginIcon
+                size="25px"
+                color="black"
+                className="hover:scale-125"
+              />
+            )}
           </button>
           <p>
             or <br></br>

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaUser as UserIcon } from "react-icons/fa";
 import { RiLoginCircleFill as SignUpIcon } from "react-icons/ri";
 import ErrorLayout from "./ErrorLayout";
+import Spinner from "../images/spinner.gif";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const Signup = () => {
     status: false,
     message: "",
   });
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -35,9 +37,11 @@ const Signup = () => {
         };
       });
     }
+    setLoading(true);
     await axios
       .post("https://to-do-api-0dlv.onrender.com/api/signup", user)
-      .then(() => navigate("/"))
+      .then(() => setLoading(false))
+      .finally(() => navigate("/"))
       .catch((error) =>
         setError(() => {
           return {
@@ -95,12 +99,20 @@ const Signup = () => {
             className="text-black p-1 rounded-lg  w-full mt-1"
           />
           <span className=" w-full flex flex-col justify-center items-center  ">
-            {" "}
-            <SignUpIcon
-              size={25}
-              className="hover:scale-125 cursor-pointer"
-              onClick={handleSignUp}
-            />
+            {loading ? (
+              <img
+                src={Spinner}
+                alt="loading..."
+                srcset=""
+                className="w-[30px]"
+              />
+            ) : (
+              <SignUpIcon
+                size={25}
+                className="hover:scale-125 cursor-pointer"
+                onClick={handleSignUp}
+              />
+            )}
             or <br></br>
             <button
               type="button"
