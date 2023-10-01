@@ -74,6 +74,7 @@ const Home = () => {
   //handle delete todo
 
   const handleDeleteTodo = async (id) => {
+    setLoading(true);
     await axios
       .patch("https://to-do-api-0dlv.onrender.com/api/delete_todo", { id })
       .then(() => setLoading(false))
