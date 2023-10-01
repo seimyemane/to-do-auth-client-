@@ -14,6 +14,9 @@ const Home = () => {
     status: false,
     message: "",
   });
+    const [addTodo, setAddTodo] = useState({
+    todo: "",
+  });
   const navigate = useNavigate();
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -43,9 +46,7 @@ const Home = () => {
     getTodos();
   }, [count]);
 
-  const [addTodo, setAddTodo] = useState({
-    todo: "",
-  });
+
   const handleTodoChange = (e) => {
     const { name, value } = e.target;
     setAddTodo(() => {
@@ -56,6 +57,11 @@ const Home = () => {
   };
   const handleAddTodoSubmit = async (e) => {
     e.preventDefault();
+    setAddToDo(() => {
+      return {
+         todo: "" 
+      }
+    })
  
 
     await axios
