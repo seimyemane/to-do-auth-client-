@@ -9,7 +9,7 @@ import Spinner from "../images/spinner.gif";
 
 axios.defaults.withCredentials = true;
 const Home = () => {
-  alert("log in with 'samir yusuf' as username and 'seim' as password")
+  
   /* setError catches error and sets the status to true which will trigger the <ErrorLayout/> component and sets the message to response.data.data */
   const [error, setError] = useState({
     status: false,
